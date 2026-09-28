@@ -1,6 +1,8 @@
 import type { ChatResponse, PassageMetadata, BhishmaResponse, ThemeInfo } from '../types';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const rawBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const normalizedUrl = rawBaseUrl.replace(/\/+$/, '');
+const API_BASE_URL = normalizedUrl.endsWith('/api') ? normalizedUrl : `${normalizedUrl}/api`;
 
 // Fallback client-side mock data & engine in case Python backend is not active
 import fallbackKBData from '../../../data/shanti_parva/shanti_parva_kb.json';
